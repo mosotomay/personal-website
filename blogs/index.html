@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog — Mauricio Sotomayor</title>
+  <meta name="description" content="Short articles on software, data, and whatever I happen to be analyzing." />
+
+  <meta property="og:title" content="Blog — Mauricio Sotomayor" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.mauriciosotomayor.com/blogs" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html">
+        <img class="logo" src="../images/brain-logo.png" alt="Mauricio Sotomayor logo" />
+        <span class="name">Mauricio Sotomayor</span>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html" class="active">Blogs</a>
+        <a class="pill" href="https://www.linkedin.com/in/mauriciosotomayor/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ TITLE ============ -->
+  <section class="page-head">
+    <div class="container">
+      <h1>The blog</h1>
+      <p>Short articles on software, product, data, and whatever I happen to be analyzing.</p>
+    </div>
+  </section>
+
+  <!-- ============ POST GRID ============ -->
+  <section>
+    <div class="container post-grid">
+
+      <a class="post-card" href="the-future-of-web3-wallets.html">
+        <img class="thumb" src="https://images.squarespace-cdn.com/content/v1/63dec0ad024f932059e4aa34/1730739951993-SGMZ6OT6SX2KLDCG2JP6/a+futuristic+digital+wallet+on+an+iPhone.png" alt="A futuristic digital wallet on an iPhone" />
+        <div class="body">
+          <span class="date">November 14, 2024</span>
+          <h3>The Future of Web3 Wallets</h3>
+          <p class="excerpt">A visual look into how I imagine the future of digital wallets.</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="rookie-revelations.html">
+        <img class="thumb" src="https://images.squarespace-cdn.com/content/v1/63dec0ad024f932059e4aa34/1703025245856-O9YAWBHO4M5P2DHQ3UZA/product-owner-vs-pm.jpg" alt="Product owner vs. product manager" />
+        <div class="body">
+          <span class="date">May 21, 2023</span>
+          <h3>Rookie Revelations</h3>
+          <p class="excerpt">Key learnings from my transition to the product team.</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="my-petroleum-past.html">
+        <img class="thumb" src="https://images.squarespace-cdn.com/content/v1/63dec0ad024f932059e4aa34/1676351160885-DE1LAE1SL48I8ZCSJAGF/unsplash-image-GrmwVnVSSdU.jpg" alt="Oil rig at dusk" />
+        <div class="body">
+          <span class="date">March 16, 2023</span>
+          <h3>My Petroleum Past</h3>
+          <p class="excerpt">A look into the research I conducted during my Master's degree in Petroleum Engineering.</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="door-dash-for-more-cash.html">
+        <img class="thumb" src="https://images.squarespace-cdn.com/content/v1/63dec0ad024f932059e4aa34/1676224795296-A6N7GPD9YJ18B9ZPZT0L/unsplash-image-s04x1QTNnCA.jpg" alt="Delivery driver on the road" />
+        <div class="body">
+          <span class="date">February 11, 2023</span>
+          <h3>Door Dash for More Cash</h3>
+          <p class="excerpt">How I optimized my Uber Eats and Door Dash side hustle while searching for jobs.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span id="year"></span> Mauricio Sotomayor</span>
+      <a class="li-foot" href="https://www.linkedin.com/in/mauriciosotomayor/" target="_blank" rel="noopener">
+        <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        Connect on LinkedIn
+      </a>
+    </div>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
