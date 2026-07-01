@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Building Bull's-Eyes with AI — Mauricio Sotomayor</title>
+  <meta name="description" content="Testing Claude Design and Claude Code end-to-end to build a dart scoring app from scratch." />
+
+  <meta property="og:title" content="Building Bull's-Eyes with AI — Mauricio Sotomayor" />
+  <meta property="og:description" content="Testing Claude Design and Claude Code end-to-end to build a dart scoring app from scratch." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.mauriciosotomayor.com/blogs/building-bulls-eyes-with-ai" />
+  <meta property="og:image" content="https://www.mauriciosotomayor.com/images/Claude%20Design%20Screenshot.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="../index.html">
+        <img class="logo" src="../images/brain-logo.png" alt="Mauricio Sotomayor logo" />
+        <span class="name">Mauricio Sotomayor</span>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="index.html" class="active">Blogs</a>
+        <a class="pill" href="https://www.linkedin.com/in/mauriciosotomayor/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="article">
+    <a class="back-link" href="index.html">← All posts</a>
+
+    <h1>Building Bull's-Eyes with AI</h1>
+    <div class="meta">
+      <span>June 30, 2026</span>
+      <span class="dot"></span>
+      <span>7 min read</span>
+    </div>
+
+    <img class="cover" src="../images/Claude Design Screenshot.png" alt="Claude Design interface showing the dart scoring app prototype" />
+
+    <p class="lead-para">AI. AI. AI. Something we keep hearing more and more about. It's progressively becoming ingrained in our lives a bit more each and every day. As somebody working in the world of software, it is a key part of how I accomplish my work on a day-to-day basis.</p>
+
+    <p>Whether I'm using it to summarize and synthesize customer feedback, draft mockups and wireframes, product requirement documents, epics, and stories, or help craft release notes, internal enablement documents, and emails for our customers, AI is a critical tool that allows me to work with higher efficiency and quality to manage all of the tasks that come up.</p>
+
+    <h2>A New Tool Catches My Eye</h2>
+
+    <p>However, in this rapidly moving world, new tools and capabilities are constantly being released. One of the newer ones that caught my eye was Claude Design. As somebody who loves high-quality designs and creating great user experiences, I wanted to see what was possible. Anthropic's models have been my personal favorites for most of the workflows I've been using AI for, so naturally, I was curious to see how the design capabilities would hold up. Prior to this, I had tested Figma Make and v0 by Vercel, which showed some promising ability to produce great designs.</p>
+
+    <p>As part of this experiment, I wanted to both test the capabilities of Claude Design and follow it all the way through to producing a functional mobile app using Claude Code. This would be good practice of the end-to-end AI workflow, from ideation and requirement gathering all the way to designing and building the application.</p>
+
+    <h2>The Spark: A Night Out at the Pub</h2>
+
+    <p>For this project, I had an idea that stemmed from a night out with some friends. We found ourselves at a pub with dart boards but no way to keep score. A quick search turned up some free apps that let you track score on your phone, but none of them looked as good as I would have liked, were as easy to use as I would have expected, or supported all the functionality I was after. So naturally, this seemed like a simple project I could use my trusty AI tooling to create.</p>
+
+    <h2>Ideation and Requirements in Claude Design</h2>
+
+    <p>I started by opening the newly launched Claude Design and dictating my vision for this new dart scoring app. A quick note: I've found myself using speech-to-text much more often lately, as it allows me to "type" at a much higher words per minute and is notably faster when listing out a lengthy set of requirements. One of the great things about Claude Design is the questions it asks at the start. It does a great job of identifying unclear requirements and asking clarifying questions, and suggesting additional functionality to enhance the experience. After specifying details such as the aesthetic, game modes and selections, and preferred score entry methods, it was off to work. Similar to Claude Cowork and Claude Code, it produced a to-do list of action items to start building the design, which is great for understanding the steps it will follow and tracking progress along the way.</p>
+
+    <img src="../images/Claude Design Screenshot.png" alt="Claude Design interface showing the dart scoring app being built" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+    <p>After some time, the prototype was ready. An interactive preview is presented on the right-hand side, where I could click through the application as if I were using it. I also loved that it provided options as "Tweaks," where I could modify the score entry method to test what a different experience would feel like. Another great feature is the ability to Comment and Mark Up, allowing me to flag issues I found with a particular component or note the changes I'd like to make to a specific part of the app.</p>
+
+    <img src="../images/Claude Design - Leave a Comment.png" alt="Claude Design comment and markup feature in action" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+    <p>While there were certainly some issues with the first few iterations of the prototype, after identifying them through testing and working through a few versions, we arrived at a version I was happy with that supported both 501 and Cricket with multiple players and teams.</p>
+
+    <h2>Building and Deploying with Claude Code</h2>
+
+    <p>Now I was ready to actually build the app and deploy it so I could access it from my phone. The Share button in the top right has the ability to hand off the project to Claude Code, which is a great bridge between the two Claude tools. From there, the process was intuitive. It read the files produced from Claude Design and built the HTML file with the same structure. I then prompted it to guide me through the next steps to make the app usable on my phone. It suggested hosting it as a progressive web app (PWA) on my GitHub, opening it on my phone in Safari, and then adding it to my Home Screen for quick access. After following those steps, I had my app ready to go.</p>
+
+    <p>I went straight to the dartboard I have at home to test it out. It was great, but there were a few kinks that needed to be ironed out that I only noticed once I was actually using it on my phone. The follow-up was simple. I opened my Claude Code session, called out the issues I encountered and where the UX/UI needed updating, and it sorted them out and pushed the changes to the repo in no time. It felt like going through the standard product development process, but with AI doing the heavy lifting at each step, with real-time feedback to make adjustments on the fly. That speed and responsiveness made the whole experience incredibly satisfying.</p>
+
+    <h2>Reflections on the AI Workflow</h2>
+
+    <p>This was a great project to experiment with AI tooling and practice the full end-to-end flow from ideation and design to execution, with multiple stops for editing and iteration along the way. It was great proof of how these tools can help accelerate the product development lifecycle and yield impressive results in a very short amount of time. It was also an interesting way to think through and experience the workflow that UX designers and software engineers typically follow, roles I partner closely with in my professional work.</p>
+
+    <p>If you'd like to check out the app and test it out for yourself, you can find it at <a href="https://github.com/mosotomay/dart-vibe-oche" target="_blank" rel="noopener">github.com/mosotomay/dart-vibe-oche</a>.</p>
+
+    <h2>Bonus: The Dart Vibe Oche Goes to Tokyo</h2>
+
+    <p>As a bonus, I was able to put my Dart Vibe Oche app to use on my recent trip to Japan! I found myself in a bar with darts in Tokyo and put my new application to the test with friends. It was a cool and fun chance to enjoy my own creation and see it hold up in the wild.</p>
+
+  </article>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span id="year"></span> Mauricio Sotomayor</span>
+      <a class="li-foot" href="https://www.linkedin.com/in/mauriciosotomayor/" target="_blank" rel="noopener">
+        <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        Connect on LinkedIn
+      </a>
+    </div>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
