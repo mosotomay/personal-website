@@ -250,8 +250,9 @@ img { max-width: 100%; height: auto; display: block; }
 .article ul, .article ol { font-size: 18px; line-height: 1.8; color: #3a3f4a; margin: 0 0 24px; padding-left: 26px; }
 .article li { margin: 0 0 10px; }
 .article ul ul { margin: 10px 0 0; }
-.article p a, .article li a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.article p a:not(.btn), .article li a:not(.btn) { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 .article .btn { margin: 8px 0 14px; }
+.article .btn-row { text-align: center; margin: 24px 0 14px; }
 .article .btn:hover { text-decoration: none; }
 .article em { color: inherit; }
 
