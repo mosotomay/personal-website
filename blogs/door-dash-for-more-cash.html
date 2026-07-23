@@ -28,7 +28,9 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="../index.html">
-        <img class="logo" src="../images/brain-logo.png" alt="Mauricio Sotomayor logo" />
+        <span class="logo brain-logo" role="img" aria-label="Mauricio Sotomayor logo" data-src="/images/brain-logo.png">
+          <canvas class="base" aria-hidden="true"></canvas><canvas class="fluid" aria-hidden="true"></canvas>
+        </span>
         <span class="name">Mauricio Sotomayor</span>
       </a>
       <nav class="nav-links">
@@ -109,5 +111,6 @@
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   <!-- Ask Mauricio — AI chat widget (served by the Cloudflare Worker) -->
   <script src="https://ai-portfolio-chat.mosotomay.workers.dev/widget.js" defer></script>
+  <script src="/brain-logo.js" defer></script>
 </body>
 </html>

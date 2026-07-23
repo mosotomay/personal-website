@@ -57,13 +57,18 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex; align-items: center; justify-content: space-between;
 }
 .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
-/* Animated brain wordmark logo (inline SVG built by js; purple fluid fills on hover/focus).
-   Custom props consumed by the mount script: fluid color + fill/drain timings. */
-.brand.brain-logo { --fluid: #5046e6; --flow: 3s; --drain: 1.4s; cursor: pointer; }
+/* Animated brain logo: two stacked canvases (static white .base + hover-driven purple
+   .fluid) built by brain-logo.js. Sized to the logo asset's native 206x189 aspect at
+   42px tall — identical box to the previous <img>, so there is zero layout shift. */
 .logo {
-  height: 42px; width: 42px; flex: none; display: block;
+  height: 42px; width: auto; aspect-ratio: 206 / 189; flex: none; display: block;
 }
-.logo svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.logo.brain-logo {
+  --fluid: #5046e6; --flow: 3s; --drain: 1.4s;
+  position: relative; cursor: pointer;
+}
+.logo.brain-logo canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.logo.brain-logo .fluid { filter: drop-shadow(0 0 4px var(--fluid)); }
 .brand .name { color: #fff; font-weight: 600; font-size: 18px; letter-spacing: -.01em; }
 
 .nav-links { display: flex; align-items: center; gap: 28px; }
