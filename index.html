@@ -31,8 +31,8 @@
     <!-- header sits transparently over the hero image -->
     <header class="site-header site-header--overlay">
       <div class="container nav">
-        <a class="brand" href="index.html">
-          <img class="logo" src="images/brain-logo.png" alt="Mauricio Sotomayor logo" />
+        <a class="brand brain-logo" href="index.html">
+          <span class="logo"><svg viewBox="0 0 512 512" fill="none" aria-hidden="true"></svg></span>
           <span class="name">Mauricio Sotomayor</span>
         </a>
         <nav class="nav-links">
@@ -110,6 +110,117 @@
   </section>
 
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+
+  <!-- Animated brain logo: builds the inline SVG network and drives the hover/focus fluid flow.
+       Engine kept intact from the design handoff (brain-icon-embed.html). -->
+  <script>
+  (function(){
+    var NS='http://www.w3.org/2000/svg';
+    // --- traced network of the favicon (512x512 space) ---
+    // internal circuit nodes + outline anchors (A*). Source = stem tip A10.
+    var N={
+      na:[208,150],nb:[148,168],j1:[208,237],j2:[150,237],nc:[126,237],
+      nd:[148,205],ne:[150,263],nf:[208,263],
+      j3:[232,214],ng:[256,190],nh:[276,150],j4:[276,207],j5:[300,215],np:[322,178],
+      ni:[232,263],nj:[256,263],j6:[240,286],nk:[200,286],nl:[200,316],
+      nm:[256,300],nn:[292,286],s1:[292,240],
+      no:[300,256],z1:[326,215],z2:[356,215],z3:[326,256],z4:[356,256],
+      nq:[300,286],nr:[352,286],ns:[380,238],nt:[370,180],
+      A0:[150,300],A1:[112,214],A2:[112,158],A3:[190,124],A4:[320,128],
+      A5:[400,190],A6:[396,256],A7:[340,314],A8:[300,321],A9:[322,398],
+      A10:[300,402],A11:[262,322],A12:[240,320]
+    };
+    // internal edges: [a,b,via?]  ;  outline edges: [a,b,'C',c1,c2]
+    var E=[
+      ['A0','A1','C',[108,288],[100,244]],['A1','A2','C',[92,206],[90,172]],
+      ['A2','A3','C',[110,130],[152,112]],['A3','A4','C',[214,100],[296,100]],
+      ['A4','A5','C',[360,118],[402,146]],['A5','A6','C',[420,202],[418,244]],
+      ['A6','A7','C',[406,292],[380,320]],['A7','A8','C',[320,316],[305,318]],
+      ['A8','A9','C',[300,350],[314,380]],['A9','A10'],
+      ['A10','A11','C',[286,372],[276,344]],['A11','A12'],['A12','A0','C',[210,322],[168,316]],
+      ['A8','nn'],['A11','nm'],
+      ['na','j1',[[208,168]]],['nb','j1',[[208,168]]],
+      ['nd','j2'],['nc','j2'],['j2','ne'],['j2','j1'],['j1','nf'],
+      ['j1','j3'],['j3','ng'],['ng','j4'],['nh','j4'],['j4','j5'],['j5','np',[[322,215]]],
+      ['j3','ni',[[232,240]]],['ni','nj'],['nj','no',[[300,263]]],
+      ['ni','j6',[[240,270]]],['j6','nk'],['nk','nl'],['j6','nm'],['j6','nn'],
+      ['nj','s1',[[280,250]]],['s1','j5'],['nm','nn'],
+      ['j5','z1'],['z1','z2'],['z2','ns',[[380,215]]],['nt','z2'],
+      ['z1','z3'],['z2','z4'],['z3','z4'],
+      ['j5','no'],['no','nq'],['nq','nr'],['nr','z4',[[352,256]]],['s1','no']
+    ];
+    var SOURCE='A10', SW=9, OW=13, DOT=8;
+
+    function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+    function mount(host){
+      var svg=host.querySelector('svg'); if(!svg) return;
+      var cs=getComputedStyle(host);
+      var flow=(parseFloat(cs.getPropertyValue('--flow'))||3);
+      var drain=(parseFloat(cs.getPropertyValue('--drain'))||1.4);
+      var fluid=(cs.getPropertyValue('--fluid')||'#5046e6').trim();
+
+      var edges=E.map(function(e){
+        var a=e[0],b=e[1],A=N[a],B=N[b],curve=e[2]==='C';
+        var c1=curve?e[3]:null,c2=curve?e[4]:null,via=curve?[]:(e[2]||[]);
+        function fwd(){return curve?('M'+A[0]+' '+A[1]+' C '+c1.join(' ')+' '+c2.join(' ')+' '+B[0]+' '+B[1])
+          :('M'+[A].concat(via,[B]).map(function(p){return p.join(' ');}).join(' L '));}
+        function bwd(){return curve?('M'+B[0]+' '+B[1]+' C '+c2.join(' ')+' '+c1.join(' ')+' '+A[0]+' '+A[1])
+          :('M'+[B].concat(via.slice().reverse(),[A]).map(function(p){return p.join(' ');}).join(' L '));}
+        return{a:a,b:b,fwd:fwd,bwd:bwd,wide:(a.charAt(0)==='A'&&b.charAt(0)==='A')};
+      });
+
+      // measure lengths via temp path
+      var tmp=el('path',{}); tmp.style.visibility='hidden'; svg.appendChild(tmp);
+      edges.forEach(function(e){tmp.setAttribute('d',e.fwd());e.len=tmp.getTotalLength();});
+      svg.removeChild(tmp);
+
+      var adj={};Object.keys(N).forEach(function(k){adj[k]=[];});
+      edges.forEach(function(e){adj[e.a].push({to:e.b,w:e.len});adj[e.b].push({to:e.a,w:e.len});});
+      var D={};Object.keys(N).forEach(function(k){D[k]=Infinity;});D[SOURCE]=0;
+      var pq=[[0,SOURCE]];
+      while(pq.length){pq.sort(function(x,y){return x[0]-y[0];});var it=pq.shift(),d=it[0],u=it[1];if(d>D[u])continue;adj[u].forEach(function(n){if(d+n.w<D[n.to]){D[n.to]=d+n.w;pq.push([D[n.to],n.to]);}});}
+      edges.forEach(function(e){e.d=(D[e.a]<=D[e.b])?e.fwd():e.bwd();e.start=Math.min(D[e.a],D[e.b]);});
+      var maxFinish=Math.max.apply(null,edges.map(function(e){return e.start+e.len;}).concat(1));
+
+      svg.innerHTML='';
+      var defs=el('defs');
+      defs.innerHTML='<filter id="brainGlow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+      svg.appendChild(defs);
+      var baseG=el('g'), fluidG=el('g',{filter:'url(#brainGlow)'});
+
+      edges.forEach(function(e){baseG.appendChild(el('path',{d:e.d,fill:'none',stroke:'#e9e9f2','stroke-width':e.wide?OW:SW,'stroke-linecap':'round','stroke-linejoin':'round'}));});
+      Object.keys(N).forEach(function(k){if(k.charAt(0)==='A')return;baseG.appendChild(el('circle',{cx:N[k][0],cy:N[k][1],r:DOT,fill:'#e9e9f2'}));});
+      svg.appendChild(baseG);svg.appendChild(fluidG);
+
+      var eAn=[],nAn=[];
+      edges.forEach(function(e){var p=el('path',{d:e.d,fill:'none','stroke-width':e.wide?OW:SW,'stroke-linecap':'round','stroke-linejoin':'round'});p.style.stroke=fluid;p.style.strokeDasharray=e.len;p.style.strokeDashoffset=e.len;fluidG.appendChild(p);eAn.push({el:p,L:e.len,start:e.start/maxFinish,dur:Math.max(e.len/maxFinish,1e-4)});});
+      Object.keys(N).forEach(function(k){if(k.charAt(0)==='A')return;var c=el('circle',{cx:N[k][0],cy:N[k][1],r:DOT});c.style.fill=fluid;c.style.opacity=0;fluidG.appendChild(c);nAn.push({el:c,at:D[k]/maxFinish});});
+
+      var gt=0,dir=0,raf=null,last=null;
+      function paint(){
+        fluidG.style.opacity=gt<=0.0006?0:1;
+        for(var i=0;i<eAn.length;i++){var a=eAn[i],p=Math.max(0,Math.min(1,(gt-a.start)/a.dur));a.el.style.strokeDashoffset=a.L*(1-p);}
+        for(var j=0;j<nAn.length;j++){var b=nAn[j];b.el.style.opacity=Math.max(0,Math.min(1,(gt-b.at)/0.03));}
+      }
+      function tick(){
+        var now=performance.now();if(last==null)last=now;var dt=(now-last)/1000;last=now;
+        if(dir>0)gt=Math.min(1,gt+dt/flow);else if(dir<0)gt=Math.max(0,gt-dt/drain);
+        paint();
+        var settled=(dir>0&&gt>=1)||(dir<0&&gt<=0);
+        if(!settled)raf=requestAnimationFrame(tick);else raf=null;
+      }
+      function kick(d){dir=d;last=performance.now();if(!raf)raf=requestAnimationFrame(tick);}
+      paint();
+      host.addEventListener('mouseenter',function(){kick(1);});
+      host.addEventListener('mouseleave',function(){kick(-1);});
+      host.addEventListener('focus',function(){kick(1);});
+      host.addEventListener('blur',function(){kick(-1);});
+    }
+    document.querySelectorAll('.brain-logo').forEach(mount);
+  })();
+  </script>
+
   <!-- Ask Mauricio — AI chat widget (served by the Cloudflare Worker) -->
   <script src="https://ai-portfolio-chat.mosotomay.workers.dev/widget.js" defer></script>
 </body>
